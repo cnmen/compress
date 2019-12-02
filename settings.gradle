@@ -1,0 +1,2 @@
+include ':app', ':compress_core'
+rootProject.name='compress_demo'
