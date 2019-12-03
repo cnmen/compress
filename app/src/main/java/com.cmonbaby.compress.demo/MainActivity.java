@@ -152,7 +152,6 @@ public class MainActivity extends AppCompatActivity {
     // click camera
     public void camera(View view) {
         try {
-            // 启动拍照
             cameraCachePath = IntentUitls.openCamera(this, Constants.CAMERA_CODE);
         } catch (CompressException e) {
             e.printStackTrace();
