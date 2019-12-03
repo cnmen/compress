@@ -38,7 +38,6 @@ import io.reactivex.schedulers.Schedulers;
 public class MainActivity extends AppCompatActivity {
 
     private String cameraCachePath; // Photo source file path
-    private final static String TAG = "simon >>> ";
     private Disposable subscribe;
 
     @Override
@@ -75,12 +74,12 @@ public class MainActivity extends AppCompatActivity {
                 .showCompressDialog(new DialogListener() { // dialog listener
                     @Override
                     public void show() {
-                        Log.e(TAG, "dialog show");
+                        Log.e(Constants.LOG_TAG, "dialog show");
                     }
 
                     @Override
                     public void dismiss() {
-                        Log.e(TAG, "dialog dismiss");
+                        Log.e(Constants.LOG_TAG, "dialog dismiss");
                     }
                 })
                 .filter(new CompressFilter() { // open filter
@@ -92,14 +91,14 @@ public class MainActivity extends AppCompatActivity {
                 .setCompressListener(new CompressListener() { // compress listener
                     @Override
                     public void onCompressStart() {
-                        Log.e(TAG, "start compress");
+                        Log.e(Constants.LOG_TAG, "start compress");
                     }
 
                     @Override
                     public void onCompressSuccess(List<PhotoBean> photoBeans) {
                         if (!photoBeans.isEmpty()) {
                             for (PhotoBean bean : photoBeans) {
-                                Log.e(TAG, bean.getCompressPath());
+                                Log.e(Constants.LOG_TAG, bean.getCompressPath());
                             }
                         }
                     }
@@ -107,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onCompressFailed(CompressException e, String... errorPhotoPath) {
                         if (errorPhotoPath.length > 0) {
-                            Log.e(TAG, errorPhotoPath[0] + e.getDetailMessage());
+                            Log.e(Constants.LOG_TAG, errorPhotoPath[0] + e.getDetailMessage());
                         }
                     }
                 }).compress();
@@ -133,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                     public void accept(List<PhotoBean> photoBeans) {
                         if (!photoBeans.isEmpty()) {
                             for (PhotoBean file : photoBeans) {
-                                Log.e(TAG, file.getCompressPath());
+                                Log.e(Constants.LOG_TAG, file.getCompressPath());
                             }
                         }
                     }
@@ -194,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onCompressSuccess(List<PhotoBean> photoBeans) {
                         if (!photoBeans.isEmpty()) {
                             for (PhotoBean bean : photoBeans) {
-                                Log.e(TAG, bean.getCompressPath());
+                                Log.e(Constants.LOG_TAG, bean.getCompressPath());
                             }
                         }
                     }
@@ -212,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onCompressSuccess(List<PhotoBean> photoBeans) {
                         if (!photoBeans.isEmpty()) {
                             for (PhotoBean bean : photoBeans) {
-                                Log.e(TAG, bean.getCompressPath());
+                                Log.e(Constants.LOG_TAG, bean.getCompressPath());
                             }
                         }
                     }
@@ -222,6 +221,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        subscribe.dispose();
+        if (subscribe != null) subscribe.dispose();
     }
 }
