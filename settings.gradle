@@ -1,2 +1,2 @@
-include ':app', ':compress_core'
+include ':app'
 rootProject.name='compress_demo'
